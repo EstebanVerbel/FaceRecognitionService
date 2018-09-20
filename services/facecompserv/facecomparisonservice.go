@@ -1,4 +1,4 @@
-package facecomparisonservice
+package facecompserv
 
 // Compare compares two images of faces and returns a score of the likelihood that it's the same person
 func Compare() {

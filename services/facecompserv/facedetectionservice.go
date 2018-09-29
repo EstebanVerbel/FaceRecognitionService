@@ -19,17 +19,19 @@ func Detect() {
 	// * Implement call to cognitive service api
 	// * return score
 
-	const subscriptionKey = "<Add Key Here>"
+	const subscriptionKey = ""
 
 	// apiURL := URL + "/analyze?visualFeatures=" + query
 	const uriBase = "https://eastus.api.cognitive.microsoft.com/face/v1.0/detect"
 
-	const imageURL = "https://upload.wikimedia.org/wikipedia/commons/3/37/Dagestani_man_and_woman.jpg"
+	const imageURL = "http://okmagazine.com/wp-content/uploads/2017/07/Angelina-Jolie-Bells-Palsy-Vanity-Fair-Interview-Long.jpg"
 
-	const params = "?returnFaceAttributes=age,gender,headPose,smile,facialHair," +
-		"glasses,emotion,hair,makeup,occlusion,accessories,blur,exposure,noise"
+	//const imageURL = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Angelina_Jolie_2_June_2014_%28cropped%29.jpg/220px-Angelina_Jolie_2_June_2014_%28cropped%29.jpg"
+
+	const params = "?returnFaceAttributes=age,gender,headPose,smile"
 
 	const uri = uriBase + params
+
 	const imageURLEnc = "{\"url\":\"" + imageURL + "\"}"
 
 	reader := strings.NewReader(imageURLEnc)

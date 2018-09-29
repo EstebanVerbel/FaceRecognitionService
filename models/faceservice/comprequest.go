@@ -1,6 +1,7 @@
 package faceservice
 
+// FaceCompRequest defines faces comparison request body
 type FaceCompRequest struct {
-	FaceId1 string
-	FaceId2 string
+	FaceID1 string `json:"faceId1"`
+	FaceID2 string `json:"faceid2"`
 }

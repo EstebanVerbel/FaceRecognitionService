@@ -9,8 +9,11 @@ import (
 
 func main() {
 
-	// run face detection
-	//facecompserv.Detect()
+	// TODO:
+	// Run face detection on first image
+	// Run face detection on second image
+	// Run face comparison on both images
+	// return score
 
 	var f faceservice.FaceCompResponse
 	f = facecompserv.Compare()

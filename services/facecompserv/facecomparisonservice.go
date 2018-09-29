@@ -8,6 +8,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/Dev/FaceRecognitionService/models/constants"
 	"github.com/Dev/FaceRecognitionService/models/faceservice"
 )
 
@@ -15,10 +16,6 @@ import (
 
 // Compare compares two images of faces and returns a score of the likelihood that it's the same person
 func Compare() faceservice.FaceCompResponse {
-
-	const uriBase = "https://eastus.api.cognitive.microsoft.com/face/v1.0/verify?"
-
-	const subscriptionKey = ""
 
 	const faceID1 string = "8f1f117b-809a-45d3-8b1d-fcc83f88b7d9"
 	const faceID2 string = "da857626-1ed4-408c-9fc9-378e86147907"
@@ -31,13 +28,13 @@ func Compare() faceservice.FaceCompResponse {
 		Timeout: time.Second * 2,
 	}
 
-	req, err := http.NewRequest("POST", uriBase, reader)
+	req, err := http.NewRequest("POST", constants.FaceCompURIBase, reader)
 	if err != nil {
 		fmt.Printf("Error Creating http Request: %v\n", err)
 	}
 
 	req.Header.Add("Content-Type", "application/json")
-	req.Header.Add("Ocp-Apim-Subscription-Key", subscriptionKey)
+	req.Header.Add("Ocp-Apim-Subscription-Key", constants.SubscriptionKey1)
 
 	resp, err := httpClient.Do(req)
 	if err != nil {

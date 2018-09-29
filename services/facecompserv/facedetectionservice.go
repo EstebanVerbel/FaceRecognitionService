@@ -1,5 +1,7 @@
 package facecompserv
 
+// API doc: https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236
+
 import (
 	"encoding/json"
 	"fmt"
@@ -7,9 +9,9 @@ import (
 	"net/http"
 	"strings"
 	"time"
-)
 
-// API doc: https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236
+	"github.com/Dev/FaceRecognitionService/models/constants"
+)
 
 // Detect faces on an image
 func Detect() {
@@ -19,18 +21,10 @@ func Detect() {
 	// * Implement call to cognitive service api
 	// * return score
 
-	const subscriptionKey = ""
-
-	// apiURL := URL + "/analyze?visualFeatures=" + query
-	const uriBase = "https://eastus.api.cognitive.microsoft.com/face/v1.0/detect"
-
 	const imageURL = "http://okmagazine.com/wp-content/uploads/2017/07/Angelina-Jolie-Bells-Palsy-Vanity-Fair-Interview-Long.jpg"
-
 	//const imageURL = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Angelina_Jolie_2_June_2014_%28cropped%29.jpg/220px-Angelina_Jolie_2_June_2014_%28cropped%29.jpg"
 
-	const params = "?returnFaceAttributes=age,gender,headPose,smile"
-
-	const uri = uriBase + params
+	const uri = constants.FaceDetectURIBase + constants.FaceDetectParams
 
 	const imageURLEnc = "{\"url\":\"" + imageURL + "\"}"
 
@@ -49,7 +43,7 @@ func Detect() {
 
 	// Add headers
 	req.Header.Add("Content-Type", "application/json")
-	req.Header.Add("Ocp-Apim-Subscription-Key", subscriptionKey)
+	req.Header.Add("Ocp-Apim-Subscription-Key", constants.SubscriptionKey1)
 
 	// Send the request and retrieve the response
 	resp, err := client.Do(req)

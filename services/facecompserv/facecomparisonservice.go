@@ -7,17 +7,14 @@ import (
 	"net/http"
 	"strings"
 	"time"
+
+	"github.com/Dev/FaceRecognitionService/models/faceservice"
 )
 
 // API ref: https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039523a
 
 // Compare compares two images of faces and returns a score of the likelihood that it's the same person
-func Compare() {
-
-	// TODO:
-	// * Take two images params to compare
-	// * Implement call to cognitive service api
-	// * return score
+func Compare() faceservice.FaceCompResponse {
 
 	const uriBase = "https://eastus.api.cognitive.microsoft.com/face/v1.0/verify?"
 
@@ -59,12 +56,13 @@ func Compare() {
 		panic(err)
 	}
 
-	// Parse the Json data
-	var f interface{}
+	var f faceservice.FaceCompResponse
 	json.Unmarshal(data, &f)
 
-	// Format and display the Json result
-	jsonFormatted, _ := json.MarshalIndent(f, "", "  ")
-
-	fmt.Println(string(jsonFormatted))
+	return f
 }
+
+// // Format and display the Json result
+// jsonFormatted, _ := json.MarshalIndent(f, "", "  ")
+
+// fmt.Println(string(jsonFormatted))

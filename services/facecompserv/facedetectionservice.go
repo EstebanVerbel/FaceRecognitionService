@@ -11,15 +11,11 @@ import (
 	"time"
 
 	"github.com/Dev/FaceRecognitionService/models/constants"
+	"github.com/Dev/FaceRecognitionService/models/faceservice"
 )
 
 // Detect faces on an image
-func Detect() {
-
-	// TODO:
-	// * Take two images params to compare
-	// * Implement call to cognitive service api
-	// * return score
+func Detect() faceservice.FaceDetectResponse {
 
 	const imageURL = "http://okmagazine.com/wp-content/uploads/2017/07/Angelina-Jolie-Bells-Palsy-Vanity-Fair-Interview-Long.jpg"
 	//const imageURL = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Angelina_Jolie_2_June_2014_%28cropped%29.jpg/220px-Angelina_Jolie_2_June_2014_%28cropped%29.jpg"
@@ -60,12 +56,23 @@ func Detect() {
 		panic(err)
 	}
 
-	// Parse the Json data
-	var f interface{}
-	json.Unmarshal(data, &f)
+	var faceResponse faceservice.FaceDetectResponse
+	var detectionResponseArray []faceservice.FaceDetectResponse
 
-	// Format and display the Json result
-	jsonFormatted, _ := json.MarshalIndent(f, "", "  ")
+	unmarshalError := json.Unmarshal(data, &detectionResponseArray)
+	if unmarshalError != nil {
+		fmt.Println("Error unmarshaling json response", unmarshalError)
+		// return
+	}
 
-	fmt.Println(string(jsonFormatted))
+	if len(detectionResponseArray) == 1 {
+		faceResponse = detectionResponseArray[0]
+		return faceResponse
+	} else if len(detectionResponseArray) > 1 {
+		// error, more than one face on image
+		return faceResponse
+	} else {
+		// No face on picture
+		return faceResponse
+	}
 }

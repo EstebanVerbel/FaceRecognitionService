@@ -1,5 +1,7 @@
 package facecompserv
 
+// API ref: https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039523a
+
 import (
 	"encoding/json"
 	"fmt"
@@ -12,13 +14,8 @@ import (
 	"github.com/Dev/FaceRecognitionService/models/faceservice"
 )
 
-// API ref: https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039523a
-
 // Compare compares two images of faces and returns a score of the likelihood that it's the same person
-func Compare() faceservice.FaceCompResponse {
-
-	const faceID1 string = "8f1f117b-809a-45d3-8b1d-fcc83f88b7d9"
-	const faceID2 string = "da857626-1ed4-408c-9fc9-378e86147907"
+func Compare(faceID1 string, faceID2 string) faceservice.FaceCompResponse {
 
 	jsonRequest := "{ \"faceId1\": \"" + faceID1 + "\", \"faceId2\": \"" + faceID2 + "\" }"
 
@@ -53,10 +50,10 @@ func Compare() faceservice.FaceCompResponse {
 		panic(err)
 	}
 
-	var f faceservice.FaceCompResponse
-	json.Unmarshal(data, &f)
+	var faceCompResponse faceservice.FaceCompResponse
+	json.Unmarshal(data, &faceCompResponse)
 
-	return f
+	return faceCompResponse
 }
 
 // // Format and display the Json result

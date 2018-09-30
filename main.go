@@ -1,9 +1,6 @@
 package main
 
 import (
-	"fmt"
-
-	"github.com/Dev/FaceRecognitionService/models/faceservice"
 	"github.com/Dev/FaceRecognitionService/services/facecompserv"
 )
 
@@ -15,10 +12,16 @@ func main() {
 	// Run face comparison on both images
 	// return score
 
-	var f faceservice.FaceCompResponse
-	f = facecompserv.Compare()
+	// var f faceservice.FaceCompResponse
 
-	fmt.Println("Printing result from Main")
-	fmt.Println("Confidence: ", f.Confidence)
-	fmt.Println("Is Identical: ", f.IsIdentical)
+	// const faceID1 string = "8f1f117b-809a-45d3-8b1d-fcc83f88b7d9"
+	// const faceID2 string = "da857626-1ed4-408c-9fc9-378e86147907"
+
+	facecompserv.Detect()
+
+	// f = facecompserv.Compare(faceID1, faceID2)
+
+	// fmt.Println("Printing result from Main")
+	// fmt.Println("Confidence: ", f.Confidence)
+	// fmt.Println("Is Identical: ", f.IsIdentical)
 }

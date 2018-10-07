@@ -12,3 +12,4 @@
 *.out
 models/constants/privatekeys.go
 FaceDetectionService/models/constants/privatekeys.go
+FaceComparisonService/models/constants/privatekeys.go

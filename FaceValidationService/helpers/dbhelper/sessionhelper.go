@@ -1,13 +1,16 @@
 package dbhelper
 
-import "github.com/gocql/gocql"
+import (
+	"github.com/Dev/FaceRecognitionService/FaceValidationService/models/constants"
+	"github.com/gocql/gocql"
+)
 
 // GetSession Gets session from Cassandra's cluster
 func GetSession() *gocql.Session {
 
-	cluster := gocql.NewCluster("127.0.0.1")
+	cluster := gocql.NewCluster(constants.KeyspaceName)
 
-	cluster.Keyspace = "faces"
+	cluster.Keyspace = constants.KeyspaceName
 	cluster.Consistency = gocql.Quorum
 
 	session, _ := cluster.CreateSession()

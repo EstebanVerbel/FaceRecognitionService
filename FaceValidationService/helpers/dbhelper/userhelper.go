@@ -21,3 +21,8 @@ func RegisterUser(email string, lastname string, firstName string) {
 		log.Fatal(err)
 	}
 }
+
+// Todo: Implement following
+
+// Get User Images
+// Add user images

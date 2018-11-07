@@ -18,7 +18,6 @@ func RegisterUser(username *string, lastname *string, firstName *string) {
 	}
 
 	session := GetSession()
-
 	var version = gocql.TimeUUID()
 
 	if err := session.Query(`INSERT INTO users (username, last_name, name, version) VALUES (?,?,?,?)`,
@@ -48,9 +47,34 @@ func verifyIfUserExists(username *string) bool {
 	return false
 }
 
+// GetUserImages gets images for specific user
+func GetUserImages(username *string) {
+
+	session := GetSession()
+
+	m := map[string]interface{}{}
+
+	var images [][]byte
+	var faceIds []string
+
+	query := `SELECT image, face_id FROM user_images WHERE "username" = ?`
+
+	iter := session.Query(query, username).Iter()
+	for iter.MapScan(m) {
+
+		faceID := m["face_id"].(string)
+		photo := m["image"].([]byte)
+
+		images = append(images, photo)
+		faceIds = append(faceIds, faceID)
+	}
+
+	// TODO: Define how to return images (what format)
+}
+
 // Todo: Implement following
 
-// Get User Images
 // Add user images
+
 // Add User Image
 // Set face id for Image

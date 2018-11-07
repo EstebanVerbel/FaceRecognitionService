@@ -72,9 +72,28 @@ func GetUserImages(username *string) {
 	// TODO: Define how to return images (what format)
 }
 
-// Todo: Implement following
+// AddUserImage adds user image to database
+func AddUserImage(username *string, image *[]byte) {
 
-// Add user images
+	session := GetSession()
+
+	isUserExists := verifyIfUserExists(username)
+
+	// if username exists in database
+	if isUserExists == false {
+		return
+	}
+
+	query := "INSERT INTO user_images (username, id, image) VALUES (?, ?, ?)"
+	id := gocql.TimeUUID
+
+	if err := session.Query(query, &username, id, &image).
+		Exec(); err != nil {
+		log.Fatal(err)
+	}
+}
+
+// Todo: Implement following
 
 // Add User Image
 // Set face id for Image

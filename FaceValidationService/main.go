@@ -15,6 +15,7 @@ func main() {
 
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/", serviceIsRunning)
+	//router.HandleFunc("/users", users)
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
 

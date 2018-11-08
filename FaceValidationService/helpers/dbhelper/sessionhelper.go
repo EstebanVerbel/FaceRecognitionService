@@ -8,13 +8,12 @@ import (
 // GetSession Gets session from Cassandra's cluster
 func GetSession() *gocql.Session {
 
-	cluster := gocql.NewCluster(constants.KeyspaceName)
+	cluster := gocql.NewCluster(constants.ClusterAddress)
 
 	cluster.Keyspace = constants.KeyspaceName
-	cluster.Consistency = gocql.Quorum
+	cluster.Consistency = gocql.One
 
 	session, _ := cluster.CreateSession()
-	defer session.Close()
 
 	return session
 }
